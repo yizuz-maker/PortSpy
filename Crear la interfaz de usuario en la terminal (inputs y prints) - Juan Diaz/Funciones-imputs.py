@@ -18,7 +18,7 @@ def obtener_configuracion():
     else:
         puerto_input = input("📍 Ingresá el puerto a escanear (por defecto 80): ").strip()
         puerto = int(puerto_input) if puerto_input.isdigit() else 80
-        puertos = [puerto]
+        puertos = [puerto]P
 
     hilos_input = input("⚙️  Ingresá la cantidad de hilos (por defecto 100): ").strip()
     hilos = int(hilos_input) if hilos_input.isdigit() else 100
@@ -31,4 +31,38 @@ def obtener_configuracion():
 
     return red, puertos, hilos
 
-print(obtener_configuracion())
+M;]ñ
+;-{
+        .{41{N JKLV,G HJNK,-BVBGHJ{444
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Aprint(obtener_configuracion())
