@@ -1,6 +1,6 @@
 def crear_matriz(ip, resultados):
     """
-    Crea una matriz con los resultados de escaneo para una IP específica.
+    Matriz con los resultados de escaneo para una IP específica.
     Matriz: [[IP, Puerto, Estado], ...]
     """
     matriz = []
