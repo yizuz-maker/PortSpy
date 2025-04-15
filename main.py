@@ -1,4 +1,5 @@
 from scanner.network_scanner import escanear_puertos
+from matrices.operaciones_matriz import crear_matriz, mostrar_matriz
 
 def main():
     ip = input("Ingrese la IP a escanear: ")
@@ -9,11 +10,14 @@ def main():
 
     resultados = escanear_puertos(ip, puertos) 
 
-    print("\n")
-    print("Resumen:")
-    for puerto, estado in resultados:
-        if estado == 'abierto':
-            print(f"Puerto {puerto}: {estado}")
+    #print("\n")
+    #print("Resumen:")
+    #for puerto, estado in resultados:
+    #    if estado == 'abierto':
+    #        print(f"Puerto {puerto}: {estado}")
+
+    matriz = crear_matriz(ip, resultados)
+    mostrar_matriz(matriz)
 
 if __name__ == "__main__": # Define que este archivo sea ejecutable
     main()
