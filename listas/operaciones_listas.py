@@ -1,5 +1,7 @@
 from functools import reduce
 
+ #   Matriz: [[IP, Puerto, Estado], ...]
+
 def obtener_puertos_abiertos(matriz):
     abiertos = list(filter(lambda fila: fila[2] == 'abierto', matriz)) #Devuelve una lista de puertos abiertos usando filter y lambda 
     return [fila[1] for fila in abiertos]

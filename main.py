@@ -1,9 +1,10 @@
 from scanner.network_scanner import escanear_puertos
 from matrices.operaciones_matriz import crear_matriz, mostrar_matriz
 from listas.operaciones_listas import obtener_puertos_abiertos, contar_puertos_abiertos, ordenar_por_puerto
+from cadenas.strings_utils import limpiar_ip, obtener_prefix 
 
 def main():
-    ip = input("Ingrese la IP a escanear: ")
+    ip = limpiar_ip(input("Ingrese la IP a escanear: "))
     rango = input("Ingresa el rango de puertos (ej: 20-25): ")
 
     inicio,fin = map(int, rango.split('-')) # rango pasa a ser ["20", "25"] y luego se mapean para que se pasen a INT
@@ -27,6 +28,8 @@ def main():
         if fila[2] == 'abierto':
             print(f"{fila[0]:<15} {fila[1]:<10} {fila[2]:<10}")
 
+    print(f"\nPrefijo de la red: {obtener_prefix(ip)}")
+    
 if __name__ == "__main__": # Define que este archivo sea ejecutable
     main()
 
