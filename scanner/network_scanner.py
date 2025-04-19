@@ -1,11 +1,13 @@
 import socket 
 from scanner.banner_grabbing import obtener_banner, decodificar_banner, obtener_banner_http, determinar_http_service
 """
-Escanea los puertos de una IP para determinar si están abiertos o cerrados.
+Escanea los puertos de una IP para determinar su estado y obtener el banner del servicio si está abierto.
 
 @param ip La dirección IP a escanear.
 @param puertos Una lista de números de puertos a comprobar.
-@return Una lista de tuplas con el formato (puerto, estado, banner), donde estado es 'abierto' o 'cerrado'.
+@return Una lista de tuplas con el formato (puerto, estado, banner), donde:
+        - estado es 'abierto' o 'cerrado'
+        - banner contiene una cadena con información del servicio (vacía si está cerrado)
 """
 def escanear_puertos(ip, puertos):
     resultados = []
