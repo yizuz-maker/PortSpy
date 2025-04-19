@@ -26,7 +26,7 @@ def main():
     matriz_ordenada = ordenar_por_puerto(matriz)
     for fila in matriz_ordenada:
         if fila[2] == 'abierto':
-            print(f"{fila[0]:<15} {fila[1]:<10} {fila[2]:<10}")
+            print(f"{fila[0]:<15} {fila[1]:<10} {fila[2]:<10} {fila[3]:<10}")
 
     print(f"\nPrefijo de la red: {obtener_prefix(ip)}")
     
