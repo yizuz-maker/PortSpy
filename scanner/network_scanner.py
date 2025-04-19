@@ -1,5 +1,12 @@
 import socket 
 
+"""
+Escanea los puertos de una IP para determinar si están abiertos o cerrados.
+
+@param ip La dirección IP a escanear.
+@param puertos Una lista de números de puertos a comprobar.
+@return Una lista de tuplas con el formato (puerto, estado), donde estado es 'abierto' o 'cerrado'.
+"""
 def escanear_puertos(ip, puertos):
     resultados = []
 
