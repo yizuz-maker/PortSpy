@@ -17,28 +17,41 @@ def escanear_puertos(ip, puertos):
         banner_decoded = ""
 
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(1)
-        resultado = sock.connect_ex((ip, puerto))
+        sock.settimeout(5)
 
-        if resultado == 0:
-            estado = 'abierto'
+        try:
+            resultado = sock.connect_ex((ip, puerto))  
 
-            if puerto == 80:
-                sock = obtener_banner_http(ip, sock)
-                banner_raw = obtener_banner(sock)
-                banner_dirty = decodificar_banner(banner_raw)
-                banner_decoded = determinar_http_service(banner_dirty)
+            if resultado == 0:
+                estado = 'abierto'
 
+                if puerto == 80:
+                    sock = obtener_banner_http(ip, sock)
+                    banner_raw = obtener_banner(sock)
+                    banner_dirty = decodificar_banner(banner_raw)
+                    banner_decoded = determinar_http_service(banner_dirty)
+                else:
+                    banner_raw = obtener_banner(sock)
+                    banner_decoded = decodificar_banner(banner_raw)
+
+                resultados.append((puerto, estado, banner_decoded))
             else:
-                banner_raw = obtener_banner(sock)
-                banner_decoded = decodificar_banner(banner_raw)
+                estado = 'cerrado'
+                resultados.append((puerto, estado, banner_decoded))
 
-            resultados.append((puerto, estado, banner_decoded))
-        else:
+        except socket.timeout:
+
             estado = 'cerrado'
             resultados.append((puerto, estado, banner_decoded))
-        
-        sock.close()
+            print(f"Timeout al intentar conectar al puerto {puerto} en {ip}")
+
+        except socket.error as e:
+
+            estado = 'cerrado'
+            resultados.append((puerto, estado, banner_decoded))
+            print(f"Error de socket al intentar conectar al puerto {puerto} en {ip}: {e}")
+
+        finally:
+            sock.close()  # Cerrar el socket
 
     return resultados
-
