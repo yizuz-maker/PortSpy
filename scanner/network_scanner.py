@@ -1,5 +1,5 @@
 import socket 
-from scanner.banner_grabbing import obtener_banner, decodificar_banner, obtener_banner_http
+from scanner.banner_grabbing import obtener_banner, decodificar_banner, obtener_banner_http, determinar_http_service
 """
 Escanea los puertos de una IP para determinar si están abiertos o cerrados.
 
@@ -23,9 +23,13 @@ def escanear_puertos(ip, puertos):
 
             if puerto == 80:
                 sock = obtener_banner_http(ip, sock)
+                banner_raw = obtener_banner(sock)
+                banner_dirty = decodificar_banner(banner_raw)
+                banner_decoded = determinar_http_service(banner_dirty)
 
-            banner_raw = obtener_banner(sock)
-            banner_decoded = decodificar_banner(banner_raw)
+            else:
+                banner_raw = obtener_banner(sock)
+                banner_decoded = decodificar_banner(banner_raw)
 
             resultados.append((puerto, estado, banner_decoded))
         else:

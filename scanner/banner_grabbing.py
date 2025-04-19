@@ -14,5 +14,10 @@ def obtener_banner_http(ip, sock):
 def decodificar_banner_http():
     pass
 
-def determinar_http_service(sock):
-    pass 
+def determinar_http_service(banner_dirty):
+    headers = banner_dirty.split("\n")
+    banner = ""
+    for line in headers:
+        if line.startswith("Server"):
+            banner = line.replace("Server: ", "").strip()
+    return banner
