@@ -12,8 +12,8 @@ def crear_matriz(ip, resultados):
     Matriz: [[IP, Puerto, Estado], ...]
     """
     matriz = []
-    for puerto, estado in resultados:
-        matriz.append([ip, puerto, estado])
+    for puerto, estado, banner in resultados:
+        matriz.append([ip, puerto, estado, banner])
     return matriz
 
 """
@@ -24,7 +24,7 @@ Cada sublista tiene el formato [IP, Puerto, Estado].
 """
 def mostrar_matriz(matriz):
     print("\n=== MATRIZ DE RESULTADOS ===")
-    print(f"{'IP':<15} {'Puerto':<10} {'Estado':<10}")
-    print("-" * 35)
+    print(f"{'IP':<15} {'Puerto':<10} {'Estado':<10} {'Banner':<10}")
+    print("-" * 45)
     for fila in matriz:
-        print(f"{fila[0]:<15} {fila[1]:<10} {fila[2]:<10}")
+        print(f"{fila[0]:<15} {fila[1]:<10} {fila[2]:<10} {fila[3]:<10}")
