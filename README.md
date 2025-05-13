@@ -1,4 +1,4 @@
-# PortSpy
+# PortSpy - Escaner de Puertos
 Algoritmos y Estructuras de Datos 1
 
 ## Integrantes (Grupo 16)
