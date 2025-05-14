@@ -50,6 +50,11 @@ def escanear_puerto(ip, puerto):
         sock.close()
 
 def escanear_puertos(ip, puertos):
+    """
+    submit()	Lanza una tarea en un hilo y devuelve un Future
+    Future	    Objeto que representa el resultado futuro de una tarea
+    result()	Espera y devuelve el valor de ese Future
+    """
     resultados = []
 
     with ThreadPoolExecutor(max_workers=100) as executor:
