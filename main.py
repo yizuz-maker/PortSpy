@@ -60,15 +60,17 @@ TOP_10_COMMON_PORTS = (21, 22, 80, 139, 144, 179, 443, 445, 8080, 8081)
 def parse_args():
     parser = argparse.ArgumentParser(description="PortSpy - Escaner de puertos en Python")
     parser.add_argument("--ip", required=True, help="Direccion IP a escanear")
-    parser.add_argument("--ports", help="Rango de puertos a escanear (ej: 20-80)", type=str)
-    parser.add_argument("--threads", help="Numero de threads a usar", type=int)
+    parser.add_argument("-p", "--ports", help="Rango de puertos a escanear (ej: 20-80)", type=str)
+    parser.add_argument("-t", "--threads", help="Numero de threads a usar", type=int)
     return parser.parse_args()
 
 def main():
     args = parse_args()
 
     ip = limpiar_ip(args.ip)
-
+    
+    threads = args.threads
+    
     if args.ports is None: # Si no se especifica el rango se ejecuta un escaneo con los 100 puertos mas comunes
         puertos = TOP_10_COMMON_PORTS
     else:

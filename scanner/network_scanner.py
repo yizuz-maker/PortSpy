@@ -62,7 +62,7 @@ def escanear_puertos(ip, puertos, threads):
         for puerto in puertos:
             futuros = [executor.submit(escanear_puerto, ip, puerto)]
 
-        for futuro in futuros:
-            resultados.append(futuro.result())
+            for futuro in futuros:
+                resultados.append(futuro.result())
 
     return resultados
