@@ -61,6 +61,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="PortSpy - Escaner de puertos en Python")
     parser.add_argument("--ip", required=True, help="Direccion IP a escanear")
     parser.add_argument("--ports", help="Rango de puertos a escanear (ej: 20-80)", type=str)
+    parser.add_argument("--threads", help="Numero de threads a usar", type=int)
     return parser.parse_args()
 
 def main():
@@ -74,7 +75,10 @@ def main():
         inicio, fin = map(int, args.ports.split('-')) # rango pasa a ser ["20", "25"] y luego se mapean para que se pasen a INT
         puertos = list(range(inicio, fin + 1))  # Puertos es una lista tipo [20, 21, 22, 23, 24, 25]
 
-    resultados = escanear_puertos(ip, puertos)
+    if args.threads is None:
+        threads = 10
+
+    resultados = escanear_puertos(ip, puertos, threads)
 
     escaneos_por_ip = construir_escaneos_por_ip(ip, resultados)
 

@@ -1,6 +1,7 @@
 import socket
 from concurrent.futures import ThreadPoolExecutor
 from scanner.banner_grabbing import obtener_banner, decodificar_banner, obtener_banner_http, determinar_http_service
+
 """
 Escanea los puertos de una IP para determinar su estado y obtener el banner del servicio si está abierto.
 
@@ -49,15 +50,15 @@ def escanear_puerto(ip, puerto):
     finally:
         sock.close()
 
-def escanear_puertos(ip, puertos):
-    """
-    submit()	Lanza una tarea en un hilo y devuelve un Future
-    Future	    Objeto que representa el resultado futuro de una tarea
-    result()	Espera y devuelve el valor de ese Future
-    """
+"""
+submit()	Lanza una tarea en un hilo y devuelve un Future
+Future	    Objeto que representa el resultado futuro de una tarea
+result()	Espera y devuelve el valor de ese Future
+"""
+def escanear_puertos(ip, puertos, threads):
     resultados = []
 
-    with ThreadPoolExecutor(max_workers=100) as executor:
+    with ThreadPoolExecutor(max_workers=threads) as executor:
         for puerto in puertos:
             futuros = [executor.submit(escanear_puerto, ip, puerto)]
 
