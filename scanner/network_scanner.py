@@ -1,5 +1,6 @@
 import socket
 from concurrent.futures import ThreadPoolExecutor
+from diccionarios.estructura_datos import construir_escaneos_por_ip
 from scanner.banner_grabbing import obtener_banner, decodificar_banner, obtener_banner_http, determinar_http_service
 
 """
@@ -23,7 +24,7 @@ def escanear_puerto(ip, puerto):
         if resultado == 0:
             estado = 'abierto'
 
-            if puerto == 80:
+            if puerto == 80 or puerto == 8080:
                 sock = obtener_banner_http(ip, sock)
                 banner_raw = obtener_banner(sock)
                 banner_dirty = decodificar_banner(banner_raw)
@@ -66,3 +67,13 @@ def escanear_puertos(ip, puertos, threads):
                 resultados.append(futuro.result())
 
     return resultados
+
+def escanear_hosts(hosts, puertos, threads):
+    escaneos_totales = {}
+    for host in hosts:
+        resultado = escanear_puertos(host, puertos, threads)
+        diccionairio = construir_escaneos_por_ip(host, resultado)
+
+        escaneos_totales.update(diccionairio)
+
+    return escaneos_totales     
