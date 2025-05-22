@@ -1,11 +1,5 @@
 import argparse
-from scanner.network_scanner import escanear_hosts, escanear_puertos
-from matrices.operaciones_matriz import crear_matriz, mostrar_matriz
-from listas.operaciones_listas import obtener_puertos_abiertos, contar_puertos_abiertos, ordenar_por_puerto
-from cadenas.strings_utils import limpiar_ip, obtener_prefix
-from diccionarios.estructura_datos import construir_escaneos_por_ip
-from archivos.leer_ips import leer_ips_desde_txt
-import json
+from core.ejecutores import procesar_host_unico, procesar_multiples_hosts
 
 TOP_1000_COMMON_PORTS = ( 
                             80,23,443,21,22,25,3389,110,445,139,143,53,135,3306,8080,1723,111,995,993,5900,1025,587,8888,199,1720,
@@ -70,52 +64,20 @@ def parse_args():
 def main():
     args = parse_args()
 
-    # ip = limpiar_ip(args.ip)
-    
-    threads = args.threads
-    
-    if args.ports is None: # Si no se especifica el rango se ejecuta un escaneo con los 100 puertos mas comunes
+    threads = args.threads if args.threads else 10 # Ternario
+
+    if args.ports is None:
         puertos = TOP_10_COMMON_PORTS
     else:
-        inicio, fin = map(int, args.ports.split('-')) # rango pasa a ser ["20", "25"] y luego se mapean para que se pasen a INT
-        puertos = list(range(inicio, fin + 1))  # Puertos es una lista tipo [20, 21, 22, 23, 24, 25]
+        inicio, fin = map(int, args.ports.split('-'))
+        puertos = list(range(inicio, fin + 1))
 
-    if args.threads is None:
-        threads = 10
-
-    if args.hosts is None:
-        resultados = escanear_puertos(ip, puertos, threads)
-
-        escaneos_por_ip = construir_escaneos_por_ip(ip, resultados)
-
-        matriz = crear_matriz(ip, resultados)
-        #mostrar_matriz(matriz)
-        abiertos = obtener_puertos_abiertos(matriz)
-        print(f"\nPuertos abiertos detectados: {abiertos}")
-
-        total_abiertos = contar_puertos_abiertos(matriz)
-        print(f"Cantidad total de puertos abiertos: {total_abiertos}")
-
-        print("\nMatriz ordenada por número de puerto:")
-        matriz_ordenada = ordenar_por_puerto(matriz)
-        for fila in matriz_ordenada:
-            if fila[2] == 'abierto':
-                print(f"{fila[0]:<15} {fila[1]:<10} {fila[2]:<10} {fila[3]:<10}")
-
-        print(f"\nPrefijo de la red: {obtener_prefix(ip)}")
-
-        print("\nResumen escructurado:")
-        for ip, datos in escaneos_por_ip.items():
-            print(f"{ip}: ")
-            for puerto in datos:
-                print(f"  Puerto {puerto['puerto']}: {puerto['estado']} {puerto['banner']}")
+    if args.hosts:
+        procesar_multiples_hosts(args.hosts, puertos, threads)
+    elif args.ip:
+        procesar_host_unico(args.ip, puertos, threads)
     else:
-        archivo = args.hosts
-        hosts = leer_ips_desde_txt(archivo)
-        resultados = escanear_hosts(hosts, puertos, threads)
-        print("Hosts: ",hosts)
-        print("Resultado: ",resultados)
-        print(json.dumps(resultados, indent=4, ensure_ascii=False)) # Printear los resultados en forma de json (paso previo a dumpear en un archivo)
+        print("Usar -h o --help para visualizar las opciones.")
 
 if __name__ == "__main__":
     main()
