@@ -9,7 +9,7 @@ Crea una matriz con los resultados de escaneo para una IP específica.
 def crear_matriz(ip, resultados):
     """
     Matriz con los resultados de escaneo para una IP específica.
-    Matriz: [[IP, Puerto, Estado], ...]
+    Matriz: [[IP, Puerto, Estado, Banner], ...]
     """
     matriz = []
     for puerto, estado, banner in resultados:
