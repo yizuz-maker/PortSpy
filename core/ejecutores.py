@@ -35,7 +35,9 @@ def procesar_host_unico(ip, puertos, threads):
 def procesar_multiples_hosts(archivo, puertos, threads):
     hosts = leer_ips_desde_txt(archivo)
     resultados = escanear_hosts(hosts, puertos, threads)
-
+ 
     print("Hosts: ",hosts)
     print("Resultado: ",resultados)
     print(json.dumps(resultados, indent=4, ensure_ascii=False)) # Printear los resultados en forma de json (paso previo a dumpear en un archivo)
+
+    return resultados

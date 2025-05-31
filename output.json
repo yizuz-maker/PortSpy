@@ -1,0 +1,106 @@
+{
+    "192.168.1.42": [
+        {
+            "puerto": 21,
+            "estado": "cerrado",
+            "banner": ""
+        },
+        {
+            "puerto": 22,
+            "estado": "abierto",
+            "banner": "SSH-2.0-OpenSSH_7.9p1 Debian-10+deb10u2"
+        },
+        {
+            "puerto": 80,
+            "estado": "abierto",
+            "banner": "Apache/2.4.38 (Debian)"
+        },
+        {
+            "puerto": 139,
+            "estado": "cerrado",
+            "banner": ""
+        },
+        {
+            "puerto": 144,
+            "estado": "cerrado",
+            "banner": ""
+        },
+        {
+            "puerto": 179,
+            "estado": "cerrado",
+            "banner": ""
+        },
+        {
+            "puerto": 443,
+            "estado": "cerrado",
+            "banner": ""
+        },
+        {
+            "puerto": 445,
+            "estado": "cerrado",
+            "banner": ""
+        },
+        {
+            "puerto": 8080,
+            "estado": "abierto",
+            "banner": "Apache/2.4.38 (Debian)"
+        },
+        {
+            "puerto": 8081,
+            "estado": "cerrado",
+            "banner": ""
+        }
+    ],
+    "192.168.1.43": [
+        {
+            "puerto": 21,
+            "estado": "cerrado",
+            "banner": ""
+        },
+        {
+            "puerto": 22,
+            "estado": "abierto",
+            "banner": "SSH-2.0-OpenSSH_7.7"
+        },
+        {
+            "puerto": 80,
+            "estado": "cerrado",
+            "banner": ""
+        },
+        {
+            "puerto": 139,
+            "estado": "cerrado",
+            "banner": ""
+        },
+        {
+            "puerto": 144,
+            "estado": "cerrado",
+            "banner": ""
+        },
+        {
+            "puerto": 179,
+            "estado": "cerrado",
+            "banner": ""
+        },
+        {
+            "puerto": 443,
+            "estado": "cerrado",
+            "banner": ""
+        },
+        {
+            "puerto": 445,
+            "estado": "cerrado",
+            "banner": ""
+        },
+        {
+            "puerto": 8080,
+            "estado": "cerrado",
+            "banner": ""
+        },
+        {
+            "puerto": 8081,
+            "estado": "cerrado",
+            "banner": ""
+        }
+    ]
+}

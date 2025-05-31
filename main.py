@@ -1,4 +1,5 @@
 import argparse
+from archivos.exportar_escaneo import exportar_json
 from core.ejecutores import procesar_host_unico, procesar_multiples_hosts
 
 TOP_1000_COMMON_PORTS = ( 
@@ -59,6 +60,7 @@ def parse_args():
     parser.add_argument("--hosts", help="Archivo .txt con las direcciones IP a escanear", type=str)
     parser.add_argument("-p", "--ports", help="Rango de puertos a escanear (ej: 20-80)", type=str)
     parser.add_argument("-t", "--threads", help="Numero de threads a usar", type=int)
+    parser.add_argument("-oJ", "--output-json", help="Exportar escaneo a un archivo json", type=str)
     return parser.parse_args()
 
 def main():
@@ -73,11 +75,17 @@ def main():
         puertos = list(range(inicio, fin + 1))
 
     if args.hosts:
-        procesar_multiples_hosts(args.hosts, puertos, threads)
+        resultados = procesar_multiples_hosts(args.hosts, puertos, threads)
     elif args.ip:
         procesar_host_unico(args.ip, puertos, threads)
     else:
         print("Usar -h o --help para visualizar las opciones.")
+
+
+    if args.output_json:
+        nombre_archivo = args.output_json
+        exportar_json(resultados, nombre_archivo)
+        
 
 if __name__ == "__main__":
     main()
