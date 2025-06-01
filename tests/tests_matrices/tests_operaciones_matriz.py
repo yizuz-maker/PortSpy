@@ -18,6 +18,6 @@ def test_answer():
     matriz_resultado = crear_matriz(ip, [(puerto, estado, banner)])
 
     matriz_esperada = []
-    matriz_esperada = [[ip, puerto, estado, banner]]
+    matriz_esperada = [[[ip, puerto, estado, banner]]]
 
     assert matriz_resultado == matriz_esperada 
