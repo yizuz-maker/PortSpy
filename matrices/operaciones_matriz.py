@@ -14,7 +14,7 @@ def crear_matriz(ip, resultados):
     matriz = []
     for puerto, estado, banner in resultados:
         matriz.append([ip, puerto, estado, banner])
-    return matriz
+    return [matriz]
 
 """
 Muestra en consola una matriz de resultados de escaneo de puertos.

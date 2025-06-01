@@ -1,5 +1,7 @@
 import argparse
 from archivos.exportar_escaneo import exportar_json
+from core.presentadores import presentador_consola
+from diccionarios.convertir_matrices import matrices_a_diccionario
 from core.ejecutores import procesar_host_unico, procesar_multiples_hosts
 
 TOP_1000_COMMON_PORTS = ( 
@@ -76,14 +78,19 @@ def main():
 
     if args.hosts:
         resultados = procesar_multiples_hosts(args.hosts, puertos, threads)
+        
     elif args.ip:
-        procesar_host_unico(args.ip, puertos, threads)
+        resultados = procesar_host_unico(args.ip, puertos, threads)
+
     else:
         print("Usar -h o --help para visualizar las opciones.")
 
+    # Finally
+    presentador_consola(resultados)
 
     if args.output_json:
         nombre_archivo = args.output_json
+        resultados = matrices_a_diccionario(resultados)
         exportar_json(resultados, nombre_archivo)
         
 
