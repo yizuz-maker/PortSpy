@@ -1,8 +1,10 @@
 import argparse
+import sys
 from archivos.exportar_escaneo import exportar_json
 from core.presentadores import presentador_consola
 from diccionarios.convertir_matrices import matrices_a_diccionario
 from core.ejecutores import procesar_host_unico, procesar_multiples_hosts
+
 
 TOP_1000_COMMON_PORTS = ( 
                             80,23,443,21,22,25,3389,110,445,139,143,53,135,3306,8080,1723,111,995,993,5900,1025,587,8888,199,1720,
@@ -63,6 +65,11 @@ def parse_args():
     parser.add_argument("-p", "--ports", help="Rango de puertos a escanear (ej: 20-80)", type=str)
     parser.add_argument("-t", "--threads", help="Numero de threads a usar", type=int)
     parser.add_argument("-oJ", "--output-json", help="Exportar escaneo a un archivo json", type=str)
+
+    if len(sys.argv) == 1:
+        parser.print_help(sys.stderr)
+        sys.exit(1)
+
     return parser.parse_args()
 
 def main():
