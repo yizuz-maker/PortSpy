@@ -37,11 +37,8 @@ PortSpy es una herramienta desarrollada en Python que permite explorar dispositi
 | Funciones de Cadena de Caracteres          | Limpiar IP (sacar los espacios en blanco), normalizar estado de puertos, obtener prefijo de red y comprar estados de puertos. |
 | Diccionarios y Tuplas | Uso de tuplas en puertos comunes (TOP_COMMON_PORTS). Uso de diccionarios al almacenar escaneos a multiples hosts |
 | Try y Except  | Implementado en network_scanner.py para atajar timeouts (por ejemplo puerto 135, 139 y 445) y errores |
-| Test Unitarios | Implementado en tests_operaciones_matriz.py para verificar que el 
-formato de almacenamiento de los escaneos sea correcto |
-| Manejo de Archivos | Implementado en leer_ips.py (Lee un archivo de texto con una ip por 
-línea) y en exportar_escaneo.py (Exporta el escaneo a un archivo JSON 
-si una flag y el nombre del archivo es especificado) | 
+| Test Unitarios | Implementado en tests_operaciones_matriz.py para verificar que el formato de almacenamiento de los escaneos sea correcto |
+| Manejo de Archivos | Implementado en leer_ips.py (Lee un archivo de texto con una ip por  línea) y en exportar_escaneo.py (Exporta el escaneo a un archivo JSON  si una flag y el nombre del archivo es especificado) | 
 
 ## Flujo del usuario
 El usuario ejecuta la herramienta en la terminal, pasando el host y rango de puertos (opcional) por argumentos.  
