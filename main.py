@@ -82,7 +82,8 @@ def main():
     else:
         inicio, fin = map(int, args.ports.split('-'))
         puertos = list(range(inicio, fin + 1))
-
+    
+    print("Inciando escaneo. Esto puede demorar unos minutos (dependiendo de la cantidad de puertos a escanear)...")
     if args.hosts:
         resultados = procesar_multiples_hosts(args.hosts, puertos, threads)
         
