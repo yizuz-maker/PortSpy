@@ -68,11 +68,4 @@ def escanear_puertos(ip, puertos, threads):
 
     return resultados
 
-def escanear_hosts(hosts, puertos, threads):
-    matriz = []
-    for host in hosts:
-        resultados = escanear_puertos(host, puertos, threads)
-    for puerto, estado, banner in resultados:
-        matriz.append([host, puerto, estado, banner])
-    return matriz
 
