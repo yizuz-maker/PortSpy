@@ -3,6 +3,11 @@ from cadenas.strings_utils import limpiar_ip, obtener_prefix
 from diccionarios.estructura_datos import construir_escaneos_por_ip
 from matrices.operaciones_matriz import crear_matriz
 
+"""
+Muestra en consola los resultados del escaneo de forma estructurada.
+
+@param matriz_general Lista de matrices, donde cada matriz contiene los resultados del escaneo de un host.
+"""
 def presentador_consola(matriz_general):
     for matriz in matriz_general:
         ip = matriz[0][0]
