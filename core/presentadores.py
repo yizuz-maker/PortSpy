@@ -6,9 +6,16 @@ import io
 import sys
 
 """
-Muestra en consola los resultados del escaneo de forma estructurada.
+Presenta por consola la información estructurada de escaneos de múltiples hosts,
+y también retorna el resultado como un string.
 
-@param matriz_general Lista de matrices, donde cada matriz contiene los resultados del escaneo de un host.
+Redirige temporalmente la salida estándar (`sys.stdout`) a un buffer para capturar
+toda la información mostrada y luego restaurar la salida original.
+
+@param matriz_general Lista de matrices de resultados, donde cada matriz contiene
+       filas con el formato [ip, puerto, estado, banner].
+
+@return Un string con todo el contenido que fue impreso por consola.
 """
 def presentador_consola(matriz_general):
     buffer = io.StringIO()
@@ -39,6 +46,6 @@ def presentador_consola(matriz_general):
 
     resultado = buffer.getvalue()
     print(resultado)
-    
+
     return resultado
 
