@@ -3,7 +3,7 @@ import sys
 from archivos.exportar_escaneo import exportar_json
 from core.presentadores import presentador_consola
 from diccionarios.convertir_matrices import matrices_a_diccionario
-from core.ejecutores import procesar_host_unico, procesar_multiples_hosts
+from core.ejecutores import procesar_host_unico, procesar_multiples_hosts, procesar_multiples_hosts_puertos
 
 
 TOP_1000_COMMON_PORTS = ( 
@@ -62,6 +62,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description="PortSpy - Escaner de puertos en Python")
     parser.add_argument("--ip", help="Direccion IP a escanear")
     parser.add_argument("--hosts", help="Archivo .txt con las direcciones IP a escanear", type=str)
+    parser.add_argument("--hosts-json", help="Archivo .json con las direcciones IP y Puertos a escanear", type=str)
     parser.add_argument("-p", "--ports", help="Rango de puertos a escanear (ej: 20-80)", type=str)
     parser.add_argument("-t", "--threads", help="Numero de threads a usar", type=int)
     parser.add_argument("-oJ", "--output-json", help="Exportar escaneo a un archivo json", type=str)
@@ -86,6 +87,9 @@ def main():
     print("Inciando escaneo. Esto puede demorar unos minutos (dependiendo de la cantidad de puertos a escanear)...")
     if args.hosts:
         resultados = procesar_multiples_hosts(args.hosts, puertos, threads)
+
+    elif args.hosts_json:
+        resultados = procesar_multiples_hosts_puertos(args.hosts_json, threads)
         
     elif args.ip:
         resultados = procesar_host_unico(args.ip, puertos, threads)

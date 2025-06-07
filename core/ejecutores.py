@@ -2,6 +2,7 @@ from scanner.network_scanner import escanear_puertos
 from matrices.operaciones_matriz import crear_matriz
 from cadenas.strings_utils import limpiar_ip
 from archivos.leer_ips import leer_ips_desde_txt
+from archivos.leer_ips import leer_ips_desde_json
 import json
 
 """
@@ -34,6 +35,24 @@ def procesar_multiples_hosts(archivo, puertos, threads):
     for host in hosts:
         matriz_host_unico = procesar_host_unico(host, puertos, threads)
         matriz_general.extend(matriz_host_unico)
+
+    return matriz_general
+
+"""
+Procesa múltiples hosts y sus respectivos puertos a partir de un archivo JSON.
+
+@param archivo Ruta al archivo JSON con formato { "IP": [puertos], ... }.
+@param threads Número de hilos a utilizar para el escaneo.
+@return Una matriz general con los resultados del escaneo de todos los hosts.
+"""
+def procesar_multiples_hosts_puertos(archivo, threads):
+    data = leer_ips_desde_json(archivo)
+    matriz_general = []
+
+    for ip in data:
+        puertos = data[ip]
+        matriz_ip = procesar_host_unico(ip, puertos, threads)
+        matriz_general.extend(matriz_ip)
 
     return matriz_general
 

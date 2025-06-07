@@ -1,3 +1,6 @@
 */__pycache__/*
 *.pyc
 hosts.txt
+output2.json
+jsonhosts.json
+output.json
