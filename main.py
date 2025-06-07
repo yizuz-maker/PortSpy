@@ -1,6 +1,6 @@
 import argparse
 import sys
-from archivos.exportar_escaneo import exportar_json
+from archivos.exportar_escaneo import exportar_json, exportar_txt
 from core.presentadores import presentador_consola
 from diccionarios.convertir_matrices import matrices_a_diccionario
 from core.ejecutores import procesar_host_unico, procesar_multiples_hosts, procesar_multiples_hosts_puertos
@@ -66,6 +66,7 @@ def parse_args():
     parser.add_argument("-p", "--ports", help="Rango de puertos a escanear (ej: 20-80)", type=str)
     parser.add_argument("-t", "--threads", help="Numero de threads a usar", type=int)
     parser.add_argument("-oJ", "--output-json", help="Exportar escaneo a un archivo json", type=str)
+    parser.add_argument("-oT", "--output-txt", help="Exportar escaneo a un archivo txt", type=str)
 
     if len(sys.argv) == 1:
         parser.print_help(sys.stderr)
@@ -98,12 +99,18 @@ def main():
         print("Usar -h o --help para visualizar las opciones.")
 
     # Finally
-    presentador_consola(resultados)
+    buffer = presentador_consola(resultados)
 
     if args.output_json:
         nombre_archivo = args.output_json
         resultados = matrices_a_diccionario(resultados)
         exportar_json(resultados, nombre_archivo)
+
+    if args.output_txt:
+        nombre_archivo = args.output_txt 
+        exportar_txt(buffer, nombre_archivo)
+
+        
         
 
 if __name__ == "__main__":
