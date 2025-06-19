@@ -15,7 +15,6 @@ PortSpy es una herramienta desarrollada en Python que permite explorar dispositi
 ## Alcance del producto
 **Funcionalidades del sistema:**
 - Escaneo de red con sockets.
-- Barrido de CIDR (192.168.1.0/24). 
 - Almacenar outputs en archivos. 
 - Input usando archivos.
 - Ejecución con argumentos
@@ -24,7 +23,6 @@ PortSpy es una herramienta desarrollada en Python que permite explorar dispositi
 - Escaneo de puertos con concurrencia (threading).
 - Detección del estado de cada puerto.
 - Escaneo de múltiples hosts.
-- Búsqueda de patrones con re.
 - Presentación de resultados con tablas.
 
 ## Requisitos funcionales (29/5/25)
