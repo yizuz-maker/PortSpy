@@ -1,3 +1,4 @@
+import re
 """
 Elimina los espacios en blanco al principio y al final de una dirección IP.
 
@@ -5,7 +6,20 @@ Elimina los espacios en blanco al principio y al final de una dirección IP.
 @return La dirección IP sin espacios en blanco.
 """
 def limpiar_ip(ip):
-    return ip.strip() # Elimina espacios en blanco
+    return ip.strip()
+
+"""
+Valida si una dirección IP es una IPv4 válida.
+
+@param ip La dirección IP a validar.
+@return True si la IP es válida; False en caso contrario.
+"""
+def validar_ip(ip):
+    ip_regex = (
+        r"^(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}"
+        r"(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)$"
+    )
+    return re.match(ip_regex, ip.strip()) is not None
 
 """
 Convierte el estado a minúsculas para su normalización.

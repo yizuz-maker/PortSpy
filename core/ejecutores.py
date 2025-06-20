@@ -1,20 +1,24 @@
 from scanner.network_scanner import escanear_puertos
 from matrices.operaciones_matriz import crear_matriz
-from cadenas.strings_utils import limpiar_ip
+from cadenas.strings_utils import limpiar_ip, validar_ip
 from archivos.leer_ips import leer_ips_desde_txt
 from archivos.leer_ips import leer_ips_desde_json
 import json
 
 """
-Procesa una única dirección IP: limpia la IP, escanea los puertos y genera la matriz de resultados.
+Procesa una única dirección IP: la limpia, valida, escanea los puertos y genera la matriz de resultados.
 
 @param ip La dirección IP a procesar.
 @param puertos Lista de puertos a escanear.
-@param threads Número de hilos (si se utiliza en el escaneo paralelo, sino 10 por default).
-@return Una matriz con el formato [[IP, Puerto, Estado, Banner], ...] si se incluye información de banner.
+@param threads Número de hilos a utilizar en el escaneo.
+@return Una matriz con el formato [[IP, Puerto, Estado, Banner], ...].
+
+@raise ValueError Si la IP proporcionada no es válida.
 """
 def procesar_host_unico(ip, puertos, threads):
     ip = limpiar_ip(ip)
+    if not validar_ip(ip):
+        raise ValueError(f"La IP proporcionada no es valida: {ip}")
     resultados = escanear_puertos(ip, puertos, threads)
     matriz = crear_matriz(ip, resultados)
     return matriz
