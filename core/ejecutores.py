@@ -8,12 +8,12 @@ import json
 """
 Procesa una única dirección IP: la limpia, valida, escanea los puertos y genera la matriz de resultados.
 
+Si la IP proporcionada no es válida, solicita una nueva al usuario.
+
 @param ip La dirección IP a procesar.
 @param puertos Lista de puertos a escanear.
 @param threads Número de hilos a utilizar en el escaneo.
 @return Una matriz con el formato [[IP, Puerto, Estado, Banner], ...].
-
-@raise ValueError Si la IP proporcionada no es válida.
 """
 def procesar_host_unico(ip, puertos, threads):
     ip = limpiar_ip(ip)
@@ -24,7 +24,14 @@ def procesar_host_unico(ip, puertos, threads):
     matriz = crear_matriz(ip, resultados)
     return matriz
 
+"""
+Solicita al usuario una dirección IP válida por consola.
 
+Si el usuario ingresa un formato incorrecto, se vuelve a solicitar la IP
+mediante una llamada recursiva.
+
+@return Una dirección IP válida como string.
+"""
 def solicitar_ip_valida():
     try:
         ip = input("Ingrese una dirección IP válida: ").strip()
