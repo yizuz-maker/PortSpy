@@ -18,10 +18,23 @@ Procesa una única dirección IP: la limpia, valida, escanea los puertos y gener
 def procesar_host_unico(ip, puertos, threads):
     ip = limpiar_ip(ip)
     if not validar_ip(ip):
-        raise ValueError(f"La IP proporcionada no es valida: {ip}")
+        # raise ValueError(f"La IP proporcionada no es valida: {ip}")
+        ip = solicitar_ip_valida()
     resultados = escanear_puertos(ip, puertos, threads)
     matriz = crear_matriz(ip, resultados)
     return matriz
+
+
+def solicitar_ip_valida():
+    try:
+        ip = input("Ingrese una dirección IP válida: ").strip()
+        ip = limpiar_ip(ip)
+        if not validar_ip(ip):
+            raise ValueError("Formato de IP incorrecto.")
+        return ip
+    except ValueError as e:
+        print(e)
+        return solicitar_ip_valida()  # Llamada recursiva
 
 """
 Procesa múltiples direcciones IP desde un archivo de texto: escanea los puertos de cada host y construye una matriz general de resultados.
