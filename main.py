@@ -110,8 +110,5 @@ def main():
         nombre_archivo = args.output_txt 
         exportar_txt(buffer, nombre_archivo)
 
-        
-        
-
 if __name__ == "__main__":
     main()

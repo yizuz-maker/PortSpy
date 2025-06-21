@@ -45,6 +45,8 @@ def procesar_multiples_hosts(archivo, puertos, threads):
 """
 Procesa múltiples hosts y sus respectivos puertos a partir de un archivo JSON.
 
+Elimina puertos duplicados para cada IP antes de escanear.
+
 @param archivo Ruta al archivo JSON con formato { "IP": [puertos], ... }.
 @param threads Número de hilos a utilizar para el escaneo.
 @return Una matriz general con los resultados del escaneo de todos los hosts.
@@ -54,7 +56,7 @@ def procesar_multiples_hosts_puertos(archivo, threads):
     matriz_general = []
 
     for ip in data:
-        puertos = data[ip]
+        puertos = list(set(data[ip]))
         matriz_ip = procesar_host_unico(ip, puertos, threads)
         matriz_general.extend(matriz_ip)
 
